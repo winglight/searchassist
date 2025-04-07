@@ -7,7 +7,6 @@
     "128": "icon128.png"
   },
   "version": "1.0",
-  "options_page": "options.html",
   "permissions": [
     "contextMenus",
     "activeTab",
@@ -17,12 +16,6 @@
   "background": {
     "service_worker": "open.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://dict.hjenglish.com/*"],
-      "js": ["content_script.js"]
-    }
-  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -31,6 +24,12 @@
       "128": "icon128.png"
     }
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["_locales/*/*.json"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "manifest_version": 3,
   "default_locale": "zh_CN"
 }

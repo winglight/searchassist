@@ -36,9 +36,10 @@ const DEFAULT_SEARCH_CONFIG = [
 async function loadSearchConfig() {
   return new Promise((resolve) => {
     chrome.storage.local.get('searchConfig', (result) => {
-      if (result.searchConfig) {
+      if (result.searchConfig && Array.isArray(result.searchConfig) && result.searchConfig.length > 0) {
         resolve(result.searchConfig);
       } else {
+        console.log('Using default search config');
         // 首次使用，保存默认配置
         chrome.storage.local.set({ 'searchConfig': DEFAULT_SEARCH_CONFIG });
         resolve(DEFAULT_SEARCH_CONFIG);
@@ -50,9 +51,14 @@ async function loadSearchConfig() {
 // 保存搜索配置
 function saveSearchConfig(config) {
   return new Promise((resolve) => {
-    chrome.storage.local.set({ 'searchConfig': config }, () => {
-      resolve();
-    });
+    if (Array.isArray(config) && config.length > 0) {
+      chrome.storage.local.set({ 'searchConfig': config }, () => {
+        resolve(true);
+      });
+    } else {
+      console.error('Invalid config format, not saving:', config);
+      resolve(false);
+    }
   });
 }
 
