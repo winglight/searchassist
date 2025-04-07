@@ -1,0 +1,130 @@
+{
+  "ext_name": {
+    "message": "搜索助手",
+    "description": ""
+  },
+  "ext_desc": {
+    "message": "在各种搜索引擎上搜索选中的文字，并自定义搜索选项",
+    "description": ""
+  },
+  "search_taobao": {
+    "message": "在淘宝上搜索 '%s'",
+    "description": ""
+  },
+  "search_acg": {
+    "message": "在ACG搜索动漫 '%s'",
+    "description": ""
+  },
+  "search_ebook": {
+    "message": "在b-ok上搜索电子书 '%s'",
+    "description": ""
+  },
+  "search_movie": {
+    "message": "在BD影视查找 '%s'",
+    "description": ""
+  },
+  "search_dandan": {
+    "message": "在蛋蛋赞搜索电影 '%s'",
+    "description": ""
+  },
+  "search_dangdang": {
+    "message": "在当当上搜索 '%s'",
+    "description": ""
+  },
+  "search_amazon": {
+    "message": "在亚马逊上搜索 '%s'",
+    "description": ""
+  },
+  "search_jd": {
+    "message": "在京东上搜索 '%s'",
+    "description": ""
+  },
+  "search_qidian": {
+    "message": "在起点搜索 '%s'",
+    "description": ""
+  },
+  "search_baidupan": {
+    "message": "在网盘搜索资源 '%s'",
+    "description": ""
+  },
+  "popup_title": {
+    "message": "搜索助手配置",
+    "description": ""
+  },
+  "add_search_item": {
+    "message": "添加搜索项",
+    "description": ""
+  },
+  "r2_config": {
+    "message": "R2配置",
+    "description": ""
+  },
+  "save_config": {
+    "message": "保存配置",
+    "description": ""
+  },
+  "config_saved": {
+    "message": "配置已保存",
+    "description": ""
+  },
+  "id_label": {
+    "message": "ID:",
+    "description": ""
+  },
+  "title_label": {
+    "message": "标题 (使用 %s 作为搜索词占位符):",
+    "description": ""
+  },
+  "url_label": {
+    "message": "URL (使用 %s 作为搜索词占位符):",
+    "description": ""
+  },
+  "delete_button": {
+    "message": "删除",
+    "description": ""
+  },
+  "r2_config_title": {
+    "message": "R2 配置",
+    "description": ""
+  },
+  "enable_r2_sync": {
+    "message": "启用 R2 同步",
+    "description": ""
+  },
+  "app_name": {
+    "message": "应用名称",
+    "description": ""
+  },
+  "url": {
+    "message": "URL",
+    "description": ""
+  },
+  "token": {
+    "message": "Token",
+    "description": ""
+  },
+  "save_button": {
+    "message": "保存",
+    "description": ""
+  },
+  "close_button": {
+    "message": "关闭",
+    "description": ""
+  },
+  "r2_config_saved": {
+    "message": "R2 配置已保存",
+    "description": ""
+  },
+  "language": {
+    "message": "语言",
+    "description": ""
+  },
+  "language_zh": {
+    "message": "中文",
+    "description": ""
+  },
+  "language_en": {
+    "message": "英文",
+    "description": ""
+  }
+}

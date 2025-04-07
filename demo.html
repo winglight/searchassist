@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳绳计数器</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        #startPage, #videoPage, #summaryPage {
+            display: none;
+        }
+        #startPage.active, #videoPage.active, #summaryPage.active {
+            display: block;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+        }
+        #countdown {
+            font-size: 72px;
+            font-weight: bold;
+            color: #333;
+        }
+        #jumpCount {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 36px;
+        }
+        #timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+        }
+        #video {
+            width: 640px;
+            height: 480px;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="startPage" class="active">
+            <h1>跳绳计数器</h1>
+            <input type="text" id="username" placeholder="用户名">
+            <input type="password" id="password" placeholder="密码">
+            <button onclick="login()">登录</button>
+            <button onclick="startJumping()">开始跳绳</button>
+            <select id="userSelect">
+                <option value="user1">用户1</option>
+                <option value="user2">用户2</option>
+                <option value="user3">用户3</option>
+            </select>
+        </div>
+
+        <div id="videoPage">
+            <video id="video" width="640" height="480" autoplay></video>
+            <canvas id="canvas" width="640" height="480"></canvas>
+            <div id="jumpCount">0</div>
+            <div id="timer">00:00</div>
+            <div id="countdown"></div>
+            <button onclick="startCounting('1')">1分钟</button>
+            <button onclick="startCounting('3')">3分钟</button>
+            <button onclick="startCounting('5')">5分钟</button>
+        </div>
+
+        <div id="summaryPage">
+            <h2>跳绳总结</h2>
+            <p>本次跳绳次数: <span id="totalJumps"></span></p>
+            <p>每分钟次数: <span id="jumpsPerMinute"></span></p>
+            <p>当天总次数: <span id="dailyTotal"></span></p>
+            <p>每分钟次数环比: <span id="minuteCompare"></span></p>
+            <p>每分钟次数同比: <span id="minuteYearCompare"></span></p>
+            <p>按天次数环比: <span id="dailyCompare"></span></p>
+            <p>按天次数同比: <span id="dailyYearCompare"></span></p>
+            <button onclick="backToStart()">返回开始页面</button>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let net;
+        let video;
+        let canvas;
+        let ctx;
+        let jumpCount = 0;
+        let lastY = 0;
+        let isJumping = false;
+
+        // 用户认证和切换
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            // 这里应该有实际的用户认证逻辑
+            currentUser = username;
+            alert(`欢迎, ${currentUser}!`);
+        }
+
+        // 视频捕捉和处理
+        async function setupCamera() {
+            video = document.getElementById('video');
+            const stream = await navigator.mediaDevices.getUserMedia({video: true});
+            video.srcObject = stream;
+            return new Promise((resolve) => {
+                video.onloadedmetadata = () => {
+                    resolve(video);
+                };
+            });
+        }
+
+        // 跳绳动作识别算法
+        async function detectPose() {
+            const pose = await net.estimateSinglePose(video);
+            const nose = pose.keypoints.find(k => k.part === 'nose');
+            if (nose) {
+                if (nose.position.y < lastY - 50 && !isJumping) {
+                    isJumping = true;
+                    jumpCount++;
+                    document.getElementById('jumpCount').textContent = jumpCount;
+                } else if (nose.position.y > lastY + 50) {
+                    isJumping = false;
+                }
+                lastY = nose.position.y;
+            }
+            requestAnimationFrame(detectPose);
+        }
+
+        async function startJumping() {
+            document.getElementById('startPage').classList.remove('active');
+            document.getElementById('videoPage').classList.add('active');
+
+            video = await setupCamera();
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+
+            net = await posenet.load();
+            detectPose();
+        }
+
+        function startCounting(minutes) {
+            let countdown = 3;
+            const countdownElement = document.getElementById('countdown');
+            const timerElement = document.getElementById('timer');
+
+            const countdownInterval = setInterval(() => {
+                countdownElement.textContent = countdown;
+                countdown--;
+
+                if (countdown < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = 'GO!';
+                    setTimeout(() => {
+                        countdownElement.textContent = '';
+                        startTimer(minutes * 60);
+                    }, 1000);
+                }
+            }, 1000);
+
+            function startTimer(seconds) {
+                let remainingTime = seconds;
+                const timerInterval = setInterval(() => {
+                    const minutes = Math.floor(remainingTime / 60);
+                    const seconds = remainingTime % 60;
+                    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                    if (remainingTime <= 10) {
+                        timerElement.style.color = 'red';
+                    }
+
+                    if (remainingTime <= 3) {
+                        countdownElement.textContent = remainingTime;
+                        countdownElement.style.fontSize = '120px';
+                    }
+
+                    remainingTime--;
+
+                    if (remainingTime < 0) {
+                        clearInterval(timerInterval);
+                        showSummary();
+                    }
+                }, 1000);
+            }
+        }
+
+        // 数据存储和检索
+        function saveJumpData() {
+            let userData = JSON.parse(localStorage.getItem(currentUser)) || {};
+            const today = new Date().toISOString().split('T')[0];
+            userData[today] = (userData[today] || 0) + jumpCount;
+            localStorage.setItem(currentUser, JSON.stringify(userData));
+        }
+
+        function getJumpData() {
+            return JSON.parse(localStorage.getItem(currentUser)) || {};
+        }
+
+        // 复杂的统计计算
+        function calculateStats() {
+            const data = getJumpData();
+            const today = new Date().toISOString().split('T')[0];
+            const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+            const lastYear = new Date(Date.now() - 365 * 86400000).toISOString().split('T')[0];
+
+            const dailyTotal = data[today] || 0;
+            const yesterdayTotal = data[yesterday] || 0;
+            const lastYearTotal = data[lastYear] || 0;
+
+            const jumpsPerMinute = jumpCount / 5;  // 假设跳绳时间为5分钟
+            const dailyCompare = yesterdayTotal ? ((dailyTotal - yesterdayTotal) / yesterdayTotal * 100).toFixed(2) + '%' : 'N/A';
+            const yearCompare = lastYearTotal ? ((dailyTotal - lastYearTotal) / lastYearTotal * 100).toFixed(2) + '%' : 'N/A';
+
+            return {
+                totalJumps: jumpCount,
+                jumpsPerMinute,
+                dailyTotal,
+                minuteCompare: '0%',  // 这需要更多历史数据来计算
+                minuteYearCompare: '0%',  // 这需要更多历史数据来计算
+                dailyCompare,
+                dailyYearCompare: yearCompare
+            };
+        }
+
+        function showSummary() {
+            document.getElementById('videoPage').classList.remove('active');
+            document.getElementById('summaryPage').classList.add('active');
+            
+            saveJumpData();
+            const stats = calculateStats();
+
+            document.getElementById('totalJumps').textContent = stats.totalJumps;
+            document.getElementById('jumpsPerMinute').textContent = stats.jumpsPerMinute.toFixed(2);
+            document.getElementById('dailyTotal').textContent = stats.dailyTotal;
+            document.getElementById('minuteCompare').textContent = stats.minuteCompare;
+            document.getElementById('minuteYearCompare').textContent = stats.minuteYearCompare;
+            document.getElementById('dailyCompare').textContent = stats.dailyCompare;
+            document.getElementById('dailyYearCompare').textContent = stats.dailyYearCompare;
+        }
+
+        function backToStart() {
+            document.getElementById('summaryPage').classList.remove('active');
+            document.getElementById('startPage').classList.add('active');
+            jumpCount = 0;
+            document.getElementById('jumpCount').textContent = '0';
+        }
+    </script>
+</body>
+</html>

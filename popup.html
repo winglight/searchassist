@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title data-i18n="popup_title">搜索助手配置</title>
+  <!-- 添加 JSZip 库引用 -->
+  <script src="jszip.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 500px;
+      padding: 15px;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .search-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .form-group {
+      margin-bottom: 8px;
+    }
+    label {
+      display: block;
+      margin-bottom: 3px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    button {
+      padding: 8px 12px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    button.delete {
+      background-color: #f44336;
+    }
+    button.delete:hover {
+      background-color: #d32f2f;
+    }
+    button.add {
+      background-color: #4caf50;
+    }
+    button.add:hover {
+      background-color: #388e3c;
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .language-selector {
+      margin-bottom: 15px;
+      text-align: right;
+    }
+    select {
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="language-selector">
+    <label for="language-select" data-i18n="language">语言</label>
+    <select id="language-select">
+      <option value="zh_CN" data-i18n="language_zh">中文</option>
+      <option value="en" data-i18n="language_en">英文</option>
+    </select>
+  </div>
+  
+  <h1 data-i18n="popup_title">搜索助手配置</h1>
+  
+  <div id="search-items-container">
+    <!-- 搜索项将通过JavaScript动态添加 -->
+  </div>
+  
+  <div class="buttons">
+    <button id="add-item" class="add" data-i18n="add_search_item">添加搜索项</button>
+    <div class="action-buttons">
+      <button id="r2-config" data-i18n="r2_config">R2配置</button>
+      <button id="save-config" data-i18n="save_config">保存配置</button>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

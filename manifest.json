@@ -1,0 +1,36 @@
+{
+  "name": "__MSG_ext_name__",
+  "description": "__MSG_ext_desc__",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "version": "1.0",
+  "options_page": "options.html",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "open.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://dict.hjenglish.com/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "manifest_version": 3,
+  "default_locale": "zh_CN"
+}

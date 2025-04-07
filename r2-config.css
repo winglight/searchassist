@@ -1,0 +1,56 @@
+.config-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 400px;
+}
+
+.config-dialog h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.config-dialog label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.config-dialog input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.config-dialog input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+.config-dialog button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.config-dialog button:hover {
+  background-color: #3367d6;
+}
+
+.config-dialog button#close-config {
+  background-color: #757575;
+}
+
+.config-dialog button#close-config:hover {
+  background-color: #616161;
+}

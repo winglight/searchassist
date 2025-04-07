@@ -1,0 +1,26 @@
+{
+  "ext_name": {
+    "message": "Search Assist",
+    "description": ""
+  },
+  "ext_desc": {
+    "message": "Search selected words with taobao,dangdang,amazon and translate any words with hjenglish",
+    "description": ""
+  },
+  "search_taobao": {
+    "message": "Search '%s' on TaoBao",
+    "description": ""
+  },
+  "search_hj": {
+    "message": "Translate '%s' on HJ",
+    "description": ""
+  },
+  "search_dangdang": {
+    "message": "Search '%s' on DangDang",
+    "description": ""
+  },
+  "search_amazon": {
+    "message": "Search '%s' on Amazon",
+    "description": ""
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "ext_name": {
+    "message": "Search Assistant",
+    "description": ""
+  },
+  "ext_desc": {
+    "message": "Search selected words with various search engines and customize your search options",
+    "description": ""
+  },
+  "search_taobao": {
+    "message": "Search '%s' on TaoBao",
+    "description": ""
+  },
+  "search_acg": {
+    "message": "Search anime '%s' on ACG",
+    "description": ""
+  },
+  "search_ebook": {
+    "message": "Search e-book '%s' on Anna's Archive",
+    "description": ""
+  },
+  "search_movie": {
+    "message": "Find '%s' on BD Movies",
+    "description": ""
+  },
+  "search_dandan": {
+    "message": "Search movie '%s' on DanDanZan",
+    "description": ""
+  },
+  "search_dangdang": {
+    "message": "Search '%s' on DangDang",
+    "description": ""
+  },
+  "search_amazon": {
+    "message": "Search '%s' on Amazon",
+    "description": ""
+  },
+  "search_jd": {
+    "message": "Search '%s' on JD",
+    "description": ""
+  },
+  "search_qidian": {
+    "message": "Search '%s' on Qidian",
+    "description": ""
+  },
+  "search_baidupan": {
+    "message": "Search resources '%s' on Cloud Drive",
+    "description": ""
+  },
+  "popup_title": {
+    "message": "Search Assistant Configuration",
+    "description": ""
+  },
+  "add_search_item": {
+    "message": "Add Search Item",
+    "description": ""
+  },
+  "r2_config": {
+    "message": "R2 Configuration",
+    "description": ""
+  },
+  "save_config": {
+    "message": "Save Configuration",
+    "description": ""
+  },
+  "config_saved": {
+    "message": "Configuration saved",
+    "description": ""
+  },
+  "id_label": {
+    "message": "ID:",
+    "description": ""
+  },
+  "title_label": {
+    "message": "Title (use %s as search term placeholder):",
+    "description": ""
+  },
+  "url_label": {
+    "message": "URL (use %s as search term placeholder):",
+    "description": ""
+  },
+  "delete_button": {
+    "message": "Delete",
+    "description": ""
+  },
+  "r2_config_title": {
+    "message": "R2 Configuration",
+    "description": ""
+  },
+  "enable_r2_sync": {
+    "message": "Enable R2 Sync",
+    "description": ""
+  },
+  "app_name": {
+    "message": "Application Name",
+    "description": ""
+  },
+  "url": {
+    "message": "URL",
+    "description": ""
+  },
+  "token": {
+    "message": "Token",
+    "description": ""
+  },
+  "save_button": {
+    "message": "Save",
+    "description": ""
+  },
+  "close_button": {
+    "message": "Close",
+    "description": ""
+  },
+  "r2_config_saved": {
+    "message": "R2 Configuration saved",
+    "description": ""
+  },
+  "language": {
+    "message": "Language",
+    "description": ""
+  },
+  "language_zh": {
+    "message": "Chinese",
+    "description": ""
+  },
+  "language_en": {
+    "message": "English",
+    "description": ""
+  }
+}
