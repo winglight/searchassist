@@ -7,12 +7,12 @@ const DEFAULT_SEARCH_CONFIG = [
   },
   {
     id: "search_ebook",
-    title: "在b-ok上搜索电子书 '%s'",
+    title: "在Anna上搜索电子书 '%s'",
     url: "https://annas-archive.org/search?q=%s"
   },
   {
     id: "search_movie",
-    title: "在BD影视查找 '%s'",
+    title: "在人人影视查找 '%s'",
     url: "https://www.rrdynb.com/plus/search.php?q=%s"
   },
   {
@@ -27,7 +27,7 @@ const DEFAULT_SEARCH_CONFIG = [
   },
   {
     id: "search_baidupan",
-    title: "在网盘搜索资源 '%s'",
+    title: "在阿里网盘搜索资源 '%s'",
     url: "https://www.alipansou.com/search?k=%s"
   }
 ];

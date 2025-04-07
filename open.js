@@ -75,3 +75,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 // 添加点击事件监听器
 chrome.contextMenus.onClicked.addListener(genericOnClick);
+
+// 监听插件图标点击事件
+chrome.action.onClicked.addListener(() => {
+  // 在新标签页中打开设置页面
+  chrome.tabs.create({ url: 'options.html' });
+});
